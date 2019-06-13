@@ -8,7 +8,7 @@ namespace RabbitMQSender
     {
         static void Main()
         {
-            var timer = new Timer(Timer, null, 0, 20000);
+            var timer = new Timer(Timer, null, 0, 2000000);
             Console.ReadLine();
         }
         static void Timer(object o)
