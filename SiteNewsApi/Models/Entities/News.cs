@@ -1,11 +1,28 @@
-﻿using System;
+﻿using SiteNewsApi.Models.Entities.Abstract;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace SiteNewsApi.Models.Entities
 {
-    public class News
+    public class News : IEntity
     {
+        public News()
+        {
+            UsersNews = new HashSet<UsersNews>();
+        }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Text { get; set; }
+        public string Url { get; set; }
+
+        public virtual DateTime? CreateDate { get; set; }
+        public virtual DateTime? ModDate { get; set; }
+        public virtual int? CreateId { get; set; }
+        public virtual int? ModId { get; set; }
+
+        public virtual User Create { get; set; }
+        public virtual User Mod { get; set; }
+        public virtual ICollection<UsersNews> UsersNews { get; set; }
+
     }
 }
