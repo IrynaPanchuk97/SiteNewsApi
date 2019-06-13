@@ -25,10 +25,10 @@ namespace SiteNewsApi
         }
        public void ConfigureServices(IServiceCollection services)
         {
-             services.AddTransient<INewsRepository, NewsRepository>();
+            services.AddTransient<INewsRepository, NewsRepository>();
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
-            // services.AddTransient<IUserRepository, UserRepository>();
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             //services.AddDbContext<NewsContext>(option =>
             //option.UseSqlServer(Configuration.GetConnectionString("DevConnection")));

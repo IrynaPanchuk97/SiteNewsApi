@@ -17,6 +17,7 @@ namespace SiteNewsApi.Repositories
         public BaseRepository(DbContext context)
         {
             _context = context;
+            _entities = context.Set<TEntity>();
         }
 
         public virtual Task<TEntity> GetByIdAsync(int id)
