@@ -1,15 +1,15 @@
 ﻿using GraphQL.Types;
-using SiteNewsApi.UnitOfWorks;
+using SiteNewsApi.Repositories.InterfaceRepository;
 
 namespace SiteNewsApi.Models.GraphQL
 {
     public class UserQuery : ObjectGraphType
     {
-        public UserQuery(UnitOfWork unitOfWork)
+        public UserQuery(IUserRepository userRepository)
         {
-            Field<ListGraphType<NewsType>>(
+            Field<ListGraphType<UserType>>(
                 "users",
-                resolve: context => unitOfWork.UserRepository.GetAllAsync());
+                resolve: context => userRepository.GetAllAsync());
         }
     }
 }

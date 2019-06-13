@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,26 +26,36 @@ namespace SiteNewsApi
         }
        public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<INewsRepository, NewsRepository>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddScoped<DbContext, NewsContext>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-
-            //services.AddDbContext<NewsContext>(option =>
-            //option.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-
-
-             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<INewsRepository, NewsRepository>();
 
 
             services.AddSingleton<NewsQuery>();
-            services.AddScoped<DbContext, NewsContext>();
-            //    services.AddSingleton<UserQuery>();
+            services.AddSingleton<UserQuery>();
+
             services.AddSingleton<NewsType>();
-          //  services.AddSingleton<UserType>();
+            services.AddSingleton<UserType>();
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
+            });
+
             var sp = services.BuildServiceProvider();
+
+          // services.AddSingleton<ISchema>(new UsersSchema(new FuncDependencyResolver(type => sp.GetService(type))));
             services.AddSingleton<ISchema>(new NewsSchema(new FuncDependencyResolver(type => sp.GetService(type))));
-           // services.AddSingleton<ISchema>(new UsersSchema(new FuncDependencyResolver(type => sp.GetService(type))));
+
 
         }
 
@@ -57,7 +68,7 @@ namespace SiteNewsApi
             app.UseGraphiQl();
             app.UseMvc();
 
-
+            app.UseCors("MyPolicy");
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("hello world!");

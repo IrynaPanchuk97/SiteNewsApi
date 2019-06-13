@@ -8,7 +8,8 @@ namespace SiteNewsApi.Models.GraphQL
         public UsersSchema(IDependencyResolver resolver)
             : base(resolver)
         {
-            Query = resolver.Resolve<NewsQuery>();
+            Query = resolver.Resolve<UserQuery>();
         }
+
     }
 }
