@@ -2,7 +2,7 @@
 using SiteNewsApi.Repositories.InterfaceRepository;
 using System.Threading.Tasks;
 
-namespace SiteNewsApi.UnitOfWork
+namespace SiteNewsApi.UnitOfWorks
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -5,6 +5,8 @@ namespace SiteNewsApi.Models
 {
     public class NewsContext : DbContext
     {
+       // public NewsContext(DbContextOptions<NewsContext> options) : base(options) { }
+
         public DbSet<News> News { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UsersNews> UsersNews { get; set; }
