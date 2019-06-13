@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SiteNewsApi.Models.DTOs
+﻿namespace SiteNewsApi.Models.DTOs
 {
     public class NewsDTO
     {
