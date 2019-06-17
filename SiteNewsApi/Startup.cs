@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SiteNewsApi.Extension;
 using SiteNewsApi.Models;
 using SiteNewsApi.Models.GraphQL;
 using SiteNewsApi.Repositories.ImplementedRepository;
@@ -28,18 +29,13 @@ namespace SiteNewsApi
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
-            services.AddScoped<DbContext, NewsContext>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<INewsRepository, NewsRepository>();
+            services.ConfigureAutoMapper();
+            services.ConfigureModelRepositories();
+            services.ConfigureGraphQL();
 
 
-            services.AddSingleton<NewsQuery>();
-            services.AddSingleton<UserQuery>();
-
-            services.AddSingleton<NewsType>();
-            services.AddSingleton<UserType>();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -51,11 +47,7 @@ namespace SiteNewsApi
                 options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
             });
 
-            var sp = services.BuildServiceProvider();
-
-          // services.AddSingleton<ISchema>(new UsersSchema(new FuncDependencyResolver(type => sp.GetService(type))));
-            services.AddSingleton<ISchema>(new NewsSchema(new FuncDependencyResolver(type => sp.GetService(type))));
-
+           
 
         }
 
