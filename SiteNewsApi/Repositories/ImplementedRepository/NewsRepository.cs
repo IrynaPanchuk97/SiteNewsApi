@@ -11,8 +11,5 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
               : base(context)
         {
         }
-        protected override IQueryable<News> ComplexEntities => Entities
-    .Include(e => e.Create)
-    .Include(e => e.Mod).OrderByDescending(u => u.ModDate).ThenByDescending(x => x.CreateDate);
     }
 }

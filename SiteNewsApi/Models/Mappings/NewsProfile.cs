@@ -10,9 +10,7 @@ namespace SiteNewsApi.Models.Mappings
         {
             CreateMap<NewsDTO, News>()
                 .ForMember(u => u.CreateDate, opt => opt.Ignore())
-                .ForMember(u => u.CreateId, opt => opt.Ignore())
-                .ForMember(u => u.ModDate, opt => opt.Ignore())
-                .ForMember(u => u.ModId, opt => opt.Ignore());
+                .ForMember(u => u.ModDate, opt => opt.Ignore());
             CreateMap<News, NewsDTO>();
 
 

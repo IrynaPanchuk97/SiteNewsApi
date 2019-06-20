@@ -29,11 +29,7 @@ namespace SiteNewsApi.Migrations
 
                     b.Property<DateTime?>("CreateDate");
 
-                    b.Property<int?>("CreateId");
-
                     b.Property<DateTime?>("ModDate");
-
-                    b.Property<int?>("ModId");
 
                     b.Property<string>("Text");
 
@@ -42,10 +38,6 @@ namespace SiteNewsApi.Migrations
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CreateId");
-
-                    b.HasIndex("ModId");
 
                     b.ToTable("News");
                 });
@@ -57,8 +49,6 @@ namespace SiteNewsApi.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime?>("CreateDate");
-
-                    b.Property<int?>("CreateId");
 
                     b.Property<string>("Email");
 
@@ -74,15 +64,9 @@ namespace SiteNewsApi.Migrations
 
                     b.Property<DateTime?>("ModDate");
 
-                    b.Property<int?>("ModId");
-
                     b.Property<string>("Password");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CreateId")
-                        .IsUnique()
-                        .HasFilter("[CreateId] IS NOT NULL");
 
                     b.ToTable("User");
                 });
@@ -100,24 +84,6 @@ namespace SiteNewsApi.Migrations
                     b.HasIndex("IdNews");
 
                     b.ToTable("UsersNews");
-                });
-
-            modelBuilder.Entity("SiteNewsApi.Models.Entities.News", b =>
-                {
-                    b.HasOne("SiteNewsApi.Models.Entities.User", "Create")
-                        .WithMany()
-                        .HasForeignKey("CreateId");
-
-                    b.HasOne("SiteNewsApi.Models.Entities.User", "Mod")
-                        .WithMany()
-                        .HasForeignKey("ModId");
-                });
-
-            modelBuilder.Entity("SiteNewsApi.Models.Entities.User", b =>
-                {
-                    b.HasOne("SiteNewsApi.Models.Entities.User", "Create")
-                        .WithOne("Mod")
-                        .HasForeignKey("SiteNewsApi.Models.Entities.User", "CreateId");
                 });
 
             modelBuilder.Entity("SiteNewsApi.Models.Entities.UsersNews", b =>

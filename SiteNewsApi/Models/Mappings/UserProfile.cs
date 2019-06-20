@@ -10,11 +10,7 @@ namespace SiteNewsApi.Models.Mappings
         public UserProfile()
         {
             CreateMap<UserDTO, User>()
-                .ForMember(u => u.Mod, opt => opt.Ignore())
-                .ForMember(u => u.ModId, opt => opt.Ignore())
                 .ForMember(u => u.ModDate, opt => opt.Ignore())
-                .ForMember(u => u.Create, opt => opt.Ignore())
-                .ForMember(u => u.CreateId, opt => opt.Ignore())
                 .ForMember(u => u.CreateDate, opt => opt.Ignore());
             CreateMap<User, UserDTO>()
                 .ForMember(u => u.Password, opt => opt.Ignore())

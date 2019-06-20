@@ -14,14 +14,9 @@ namespace SiteNewsApi.Models.Entities
         public string Author { get; set; }
         public string Text { get; set; }
         public string Url { get; set; }
+        public  DateTime? CreateDate { get; set; }
+        public  DateTime? ModDate { get; set; }
 
-        public virtual DateTime? CreateDate { get; set; }
-        public virtual DateTime? ModDate { get; set; }
-        public virtual int? CreateId { get; set; }
-        public virtual int? ModId { get; set; }
-
-        public virtual User Create { get; set; }
-        public virtual User Mod { get; set; }
         public virtual ICollection<UsersNews> UsersNews { get; set; }
 
     }
