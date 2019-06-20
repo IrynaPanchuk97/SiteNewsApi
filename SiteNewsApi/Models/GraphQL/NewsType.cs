@@ -1,9 +1,9 @@
 ﻿using GraphQL.Types;
-using SiteNewsApi.Models.Entities;
+using SiteNewsApi.Models.DTOs;
 
 namespace SiteNewsApi.Models.GraphQL
 {
-    public class NewsType : ObjectGraphType<News>
+    public class NewsType : ObjectGraphType<NewsDTO>
     {
         public NewsType()
         {

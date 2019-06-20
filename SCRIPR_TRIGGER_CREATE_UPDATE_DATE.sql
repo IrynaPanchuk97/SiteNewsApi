@@ -33,7 +33,8 @@ ALTER TRIGGER [dbo].[TRIGGER_DATE_USER_CREATE]
   AS
 BEGIN
   UPDATE [dbo].[User]
-    SET CreateDate = GETDATE()
+    SET CreateDate = GETDATE(),
+		IsActive = 'true'
 END
 
 GO

@@ -36,8 +36,7 @@ namespace SiteNewsApi.Extension
         }
         public static void ConfigureGraphQL(this IServiceCollection services)
         {
-            services.AddSingleton<NewsQuery>();
-            services.AddSingleton<UserQuery>();
+            services.AddSingleton<NewsContextQuery>();
 
             services.AddSingleton<NewsType>();
             services.AddSingleton<UserType>();

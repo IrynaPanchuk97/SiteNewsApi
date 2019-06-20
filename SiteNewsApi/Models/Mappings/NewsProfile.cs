@@ -10,8 +10,11 @@ namespace SiteNewsApi.Models.Mappings
         {
             CreateMap<NewsDTO, News>()
                 .ForMember(u => u.CreateDate, opt => opt.Ignore())
-                .ForMember(u => u.ModDate, opt => opt.Ignore());
-            CreateMap<News, NewsDTO>();
+                .ForMember(u => u.ModDate, opt => opt.Ignore())
+                .ForMember(u => u.UsersNews, opt => opt.Ignore());
+
+            CreateMap<News, NewsDTO>()
+                .ForMember(u => u.LikedLevel, opt => opt.Ignore());
 
 
         }
