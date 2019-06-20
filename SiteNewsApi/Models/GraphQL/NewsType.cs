@@ -11,7 +11,7 @@ namespace SiteNewsApi.Models.GraphQL
             Field(x => x.Author);
             Field(x => x.Text);
             Field(x => x.Url);
-            //Field(x => x.UsersNews);
+            Field(x => x.LikedLevel);
         }
     }
 }

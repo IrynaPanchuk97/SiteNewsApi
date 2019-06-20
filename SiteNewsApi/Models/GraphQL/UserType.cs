@@ -1,11 +1,15 @@
-﻿using GraphQL.Types;
+﻿using AutoMapper;
+using GraphQL.Types;
 using SiteNewsApi.Models.DTOs;
+using SiteNewsApi.Models.Entities;
+using SiteNewsApi.Repositories.InterfaceRepository;
+using System.Collections.Generic;
 
 namespace SiteNewsApi.Models.GraphQL
 {
     public class UserType : ObjectGraphType<UserDTO>
     {
-        public UserType()
+        public UserType(INewsRepository newsRepository, IMapper mapper)
         {
             Field(x => x.Email);
             Field(x => x.FirstName);
@@ -14,7 +18,10 @@ namespace SiteNewsApi.Models.GraphQL
             Field(x => x.Login);
             Field(x => x.MiddleName);
             Field(x => x.Password);
-           // Field(x => x.UsersNews);
+            Field<ListGraphType<NewsType>>(
+                "newsAll",
+                resolve: context => mapper.Map<IEnumerable<News>, IList<NewsDTO>>(newsRepository.GetAllAsync().Result));
+
         }
     }
 }
