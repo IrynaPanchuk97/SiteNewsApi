@@ -12,8 +12,8 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
     {
         private readonly DbContext context;
 
-        public UserRepository(DbContext context, IDistributedCache distributedCache)
-            : base(context, distributedCache)
+        public UserRepository(DbContext context)
+            : base(context)
         {
             this.context = context;
         }

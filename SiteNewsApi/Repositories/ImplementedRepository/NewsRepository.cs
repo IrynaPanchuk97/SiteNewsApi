@@ -11,8 +11,8 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
     public class NewsRepository : BaseRepository<News>, INewsRepository
     {
         private readonly DbContext context;
-        public NewsRepository(DbContext context, IDistributedCache distributedCache)
-              : base(context, distributedCache)
+        public NewsRepository(DbContext context)
+              : base(context)
         {
             this.context = context;
         }

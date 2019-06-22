@@ -13,6 +13,8 @@ namespace SiteNewsApi.Repositories
         Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> GetRangeAsync(uint index, uint amount);
         Task<TEntity> AddAsync(TEntity entity);
+        Task<int> SaveAsync();
+
         TEntity Remove(TEntity entity);
         TEntity Update(TEntity entity);
         TEntity UpdateWithIgnoreProperty<TProperty>(TEntity entity,

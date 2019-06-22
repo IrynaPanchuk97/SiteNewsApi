@@ -1,20 +1,13 @@
 ﻿using GraphiQl;
 using GraphQL;
-using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SiteNewsApi.Extension;
-using SiteNewsApi.Models;
-using SiteNewsApi.Models.GraphQL;
-using SiteNewsApi.Repositories.ImplementedRepository;
-using SiteNewsApi.Repositories.InterfaceRepository;
-using SiteNewsApi.UnitOfWorks;
 
 namespace SiteNewsApi
 {

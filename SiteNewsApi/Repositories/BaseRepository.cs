@@ -37,12 +37,15 @@ namespace SiteNewsApi.Repositories
 
         public virtual Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
         {
+            
             return Task.FromResult<IEnumerable<TEntity>>(ComplexEntities.Where(predicate));
         }
 
         public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
-            return (await Entities.AddAsync(entity)).Entity;
+             await Entities.AddAsync(entity);
+            _context.SaveChanges();
+            return entity ;
         }
 
         public virtual TEntity Remove(TEntity entity)
@@ -66,6 +69,11 @@ namespace SiteNewsApi.Repositories
             _context.Entry(entity).State = EntityState.Modified;
             _context.Entry(entity).Property(ignorePropertyExpression).IsModified = false;
             return entity;
+        }
+
+        public Task<int> SaveAsync()
+        {
+            return _context.SaveChangesAsync();
         }
 
         protected virtual DbSet<TEntity> Entities => _entities ?? (_entities = _context.Set<TEntity>());
