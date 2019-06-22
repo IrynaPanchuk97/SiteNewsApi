@@ -2,7 +2,7 @@
 using GraphQL.Types;
 using SiteNewsApi.Models.DTOs;
 using SiteNewsApi.Models.Entities;
-using SiteNewsApi.Repositories.InterfaceRepository;
+using SiteNewsApi.UnitOfWorks;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,7 +10,7 @@ namespace SiteNewsApi.Models.GraphQL
 {
     public class UserType : ObjectGraphType<UserDTO>
     {
-        public UserType(INewsRepository newsRepository, IMapper mapper)
+        public UserType(IUnitOfWork unitOfWork, IMapper mapper)
         {
             Field(x => x.Id, type: typeof(IdGraphType));
             Field(x => x.Email, type: typeof(StringGraphType));
@@ -26,7 +26,7 @@ namespace SiteNewsApi.Models.GraphQL
                 {
                     var user = context.Source;
                     return mapper.Map<List<News>, List<NewsDTO>>(
-                        newsRepository.GetNewlLikedByUserAsync(user.Id).Result.ToList(),
+                        unitOfWork.NewsRepository.GetNewlLikedByUserAsync(user.Id).Result.ToList(),
                         opt => opt.AfterMap((news, newsDTO) => MapLikedLevel(ref news, ref newsDTO, user.Id)));
                 });
         }

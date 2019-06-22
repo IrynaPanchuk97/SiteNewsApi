@@ -18,8 +18,8 @@ namespace SiteNewsApi.UnitOfWorks
             IUserRepository userRepository)
         {
             _context = context;
-            NewsRepository = NewsRepository;
-            UserRepository = UserRepository;
+            NewsRepository = newsRepository;
+            UserRepository = userRepository;
         }
         public Task<int> SaveAsync()
         {
