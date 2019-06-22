@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using SiteNewsApi.Models.Entities;
 using SiteNewsApi.Repositories.InterfaceRepository;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
     {
         private readonly DbContext context;
 
-        public UserRepository(DbContext context)
-            : base(context)
+        public UserRepository(DbContext context, IDistributedCache distributedCache)
+            : base(context, distributedCache)
         {
             this.context = context;
         }

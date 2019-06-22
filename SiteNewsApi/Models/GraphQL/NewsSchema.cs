@@ -8,6 +8,7 @@ namespace SiteNewsApi.Models.GraphQL
         public NewsSchema(IDependencyResolver resolver)
             :base(resolver)
         {
+            Mutation = resolver.Resolve<NewsContextMutation>();
             Query = resolver.Resolve<NewsContextQuery>();
         }
     }

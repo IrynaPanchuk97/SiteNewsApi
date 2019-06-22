@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace SiteNewsApi.Models.Entities
 {
+    [Serializable]
     public class User : IEntity
     {
         public User() => UsersNews = new HashSet<UsersNews>();
