@@ -20,5 +20,14 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
             return Task.FromResult<IEnumerable<News>>(context.Set<News>()
                 .Include(x=>x.UsersNews));
         }
+
+        public async Task<IEnumerable<News>> GetNewlLikedByUserAsync(int IdUser)
+        {
+           Task<IEnumerable<News>> result =  Task.FromResult<IEnumerable<News>>(context.Set<News>()
+               .Include(x => x.UsersNews));
+
+            var res = result.Result.Where(i => i.UsersNews.Count != 0).Where(u=>u.UsersNews.Select(o=>o.IdUser).Contains(IdUser));
+            return await Task.FromResult(res);
+        }
     }
 }

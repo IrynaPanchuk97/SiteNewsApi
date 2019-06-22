@@ -7,11 +7,12 @@ namespace SiteNewsApi.Models.GraphQL
     {
         public NewsType()
         {
-            Field(x => x.Title);
-            Field(x => x.Author);
-            Field(x => x.Text);
-            Field(x => x.Url);
-            Field(x => x.LikedLevel);
+            Field(x => x.Id, type: typeof(IdGraphType));
+            Field(x => x.Title, type: typeof(StringGraphType));
+            Field(x => x.Author, type: typeof(StringGraphType));
+            Field(x => x.Text, type: typeof(StringGraphType));
+            Field(x => x.Url, type: typeof(StringGraphType));
+            Field(x => x.LikedLevel, type: typeof(StringGraphType));
         }
     }
 }

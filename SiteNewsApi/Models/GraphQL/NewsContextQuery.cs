@@ -16,8 +16,17 @@ namespace SiteNewsApi.Models.GraphQL
                 resolve: context => mapper.Map<IEnumerable<News>, IList<NewsDTO>>(newsRepository.GetAllAsync().Result));
 
             Field<ListGraphType<UserType>>(
-            "users",
-            resolve: context => mapper.Map<IEnumerable<User>, IList<UserDTO>>(userRepository.GetAllAsync().Result));
+                "users",
+                resolve: context => mapper.Map<IEnumerable<User>, IList<UserDTO>>(userRepository.GetAllAsync().Result));
+
+            Field<UserType>(
+               "user",
+                arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "id" }),      
+                resolve: context =>
+                {
+                    int id = context.GetArgument<int>("id");
+                    return mapper.Map<User, UserDTO>(userRepository.GetByIdAsync(id).Result);
+                });
         }
     }
 }
