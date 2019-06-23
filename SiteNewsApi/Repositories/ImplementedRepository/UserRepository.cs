@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using SiteNewsApi.Models.Entities;
 using SiteNewsApi.Repositories.InterfaceRepository;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SiteNewsApi.Repositories.ImplementedRepository
@@ -17,6 +15,13 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
         {
             this.context = context;
         }
+
+        public async Task<UsersNews> AddLikedNewsAsync(UsersNews entity)
+        {
+            await context.Set<UsersNews>().AddAsync(entity);
+            return entity;
+        }
+
         public override Task<IEnumerable<User>> GetAllAsync()
         {
             var c = Task.FromResult<IEnumerable<User>>(context.Set<User>()

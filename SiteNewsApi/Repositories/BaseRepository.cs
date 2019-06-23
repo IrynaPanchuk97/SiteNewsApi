@@ -71,11 +71,6 @@ namespace SiteNewsApi.Repositories
             return entity;
         }
 
-        public Task<int> SaveAsync()
-        {
-            return _context.SaveChangesAsync();
-        }
-
         protected virtual DbSet<TEntity> Entities => _entities ?? (_entities = _context.Set<TEntity>());
 
         protected virtual IQueryable<TEntity> ComplexEntities => Entities;

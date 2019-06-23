@@ -14,7 +14,7 @@ namespace SiteNewsApi.Models.GraphQL
             Field<UserType>(
                 "createUser",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<UserInputType>>{ Name = "user"}
+                    new QueryArgument<UserInputType>{ Name = "user"}
                     ),
                 resolve: context =>
                 {
@@ -22,6 +22,19 @@ namespace SiteNewsApi.Models.GraphQL
                      return mapper.Map<User,UserDTO>(unitOfWork.UserRepository.AddAsync(mapper.Map<UserDTO, User>(user)).Result);
                    
                 });
+
+            Field<UserNewsType>( 
+        "userLikeNews",
+        arguments: new QueryArguments(
+            new QueryArgument<UserNewsInputType> { Name = "userNews" }
+            ),
+        resolve: context =>
+        {
+            var userNews = context.GetArgument<UsersNews>("userNews");
+            return unitOfWork.UserRepository.AddLikedNewsAsync(userNews);
+
+        });
+
         }
     }
 }

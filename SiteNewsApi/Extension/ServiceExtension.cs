@@ -41,6 +41,8 @@ namespace SiteNewsApi.Extension
 
             services.AddSingleton<NewsType>();
             services.AddSingleton<UserType>();
+            services.AddSingleton<UserNewsType>();
+            services.AddSingleton<UserNewsInputType>();
             services.AddSingleton<UserInputType>();
 
             var sp = services.BuildServiceProvider();

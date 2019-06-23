@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using SiteNewsApi.Models.Entities;
 using SiteNewsApi.Repositories.InterfaceRepository;
 using System.Collections.Generic;

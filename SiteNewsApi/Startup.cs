@@ -38,10 +38,7 @@ namespace SiteNewsApi
             services.Configure<MvcOptions>(options =>
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
-            });
-
-           
-
+            }); 
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
