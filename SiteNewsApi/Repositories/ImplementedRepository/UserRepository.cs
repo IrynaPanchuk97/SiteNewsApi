@@ -24,7 +24,7 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
 
         public override Task<IEnumerable<User>> GetAllAsync()
         {
-            var c = Task.FromResult<IEnumerable<User>>(context.Set<User>()
+            var c = Task.FromResult<IEnumerable<User>>(_entities
                 .Include(x => x.UsersNews)
                 .ThenInclude(y=>y.News));
             return c;

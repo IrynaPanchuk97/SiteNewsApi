@@ -9,21 +9,19 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
 {
     public class NewsRepository : BaseRepository<News>, INewsRepository
     {
-        private readonly DbContext context;
         public NewsRepository(DbContext context)
               : base(context)
         {
-            this.context = context;
         }
         public override Task<IEnumerable<News>> GetAllAsync()
         {
-            return Task.FromResult<IEnumerable<News>>(context.Set<News>()
+            return Task.FromResult<IEnumerable<News>>(_entities
                 .Include(x=>x.UsersNews));
         }
 
         public async Task<IEnumerable<News>> GetNewlLikedByUserAsync(int IdUser)
         {
-           Task<IEnumerable<News>> result =  Task.FromResult<IEnumerable<News>>(context.Set<News>()
+           Task<IEnumerable<News>> result =  Task.FromResult<IEnumerable<News>>(_entities
                .Include(x => x.UsersNews));
 
             var res = result.Result.Where(i => i.UsersNews.Count != 0).Where(u=>u.UsersNews.Select(o=>o.IdUser).Contains(IdUser));

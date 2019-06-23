@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SiteNewsApi.Models.Entities.Abstract;
+using SiteNewsApi.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +14,23 @@ namespace SiteNewsApi.Repositories
     {
         private readonly DbContext _context;
         protected DbSet<TEntity> _entities;
+        protected RedisCash redisCash;
 
         public BaseRepository(DbContext context)
         {
             _context = context;
             _entities = context.Set<TEntity>();
+            redisCash = new RedisCash();
         }
 
         public virtual Task<TEntity> GetByIdAsync(int id)
         {
-            return ComplexEntities.SingleOrDefaultAsync(t => t.Id == id);
+            var resultCash = redisCash.Get<TEntity>(id.ToString());
+            if (resultCash != null) return Task.FromResult(resultCash);
+
+            var result =  ComplexEntities.SingleOrDefaultAsync(t => t.Id == id);
+            redisCash.Set(result.Id.ToString(), result);
+            return result;
         }
 
         public virtual Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
@@ -32,6 +40,7 @@ namespace SiteNewsApi.Repositories
 
         public virtual Task<IEnumerable<TEntity>> GetAllAsync()
         {
+            // return Task.FromResult(redisCash.GetAll<TEntity>());
             return Task.FromResult<IEnumerable<TEntity>>(ComplexEntities);
         }
 
@@ -45,16 +54,20 @@ namespace SiteNewsApi.Repositories
         {
              await Entities.AddAsync(entity);
             _context.SaveChanges();
+            redisCash.Set(entity.Id.ToString(), entity);
             return entity ;
         }
 
         public virtual TEntity Remove(TEntity entity)
         {
+            redisCash.Delete(entity.Id.ToString());
             return Entities.Remove(entity).Entity;
         }
 
         public virtual TEntity Update(TEntity entity)
         {
+            redisCash.Delete(entity.Id.ToString());
+            redisCash.Set(entity.Id.ToString(), entity);
             return Entities.Update(entity).Entity;
         }
 
