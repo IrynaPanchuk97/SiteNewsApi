@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  sitenewsapi:
+    image: ${DOCKER_REGISTRY-}sitenewsapi
+    build:
+      context: .
+      dockerfile: SiteNewsApi/Dockerfile
+
+  rabbitmqsender:
+    image: ${DOCKER_REGISTRY-}rabbitmqsender
+    build:
+      context: .
+      dockerfile: RabbitMQSender/Dockerfile
+
+
+  rabbitmqconsumer:
+    image: ${DOCKER_REGISTRY-}rabbitmqconsumer
+    build:
+      context: .
+      dockerfile: RabbitMqConsumer/Dockerfile
+
