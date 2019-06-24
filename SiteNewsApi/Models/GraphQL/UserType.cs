@@ -29,12 +29,30 @@ namespace SiteNewsApi.Models.GraphQL
                         unitOfWork.NewsRepository.GetNewlLikedByUserAsync(user.Id).Result.ToList(),
                         opt => opt.AfterMap((news, newsDTO) => MapLikedLevel(ref news, ref newsDTO, user.Id)));
                 });
+            Field<ListGraphType<NewsType>>(
+         "allnews",
+                 resolve: context =>
+                 {
+                     var user = context.Source;
+                     return mapper.Map<List<News>, List<NewsDTO>>(
+                         unitOfWork.NewsRepository.GetAllAsync().Result.ToList(),
+                         opt => opt.AfterMap((news, newsDTO) => MapLikedLevel(ref news, ref newsDTO, user.Id)));
+                 });
         }
         private void MapLikedLevel(ref List<News> news, ref List<NewsDTO> newsDTO, int idUser)
         {
             for (int i = 0; i < news.Count;i++)
             {
-                newsDTO[i].LikedLevel = news[i].UsersNews.Where(x => x.IdUser == idUser).Select(w => w.LikedLevel).ToList<string>()[0];
+                if(news[i].UsersNews.Count>0)
+                {
+                    List<UsersNews> usersNews = news[i].UsersNews.Where(x => x.IdUser == idUser).ToList();
+                    if(usersNews.Count >0)
+                    {
+                        newsDTO[i].LikedLevel = usersNews.Select(w => w.LikedLevel).ToList<string>()[0];
+
+                    }
+
+                }
             }
         }
     }

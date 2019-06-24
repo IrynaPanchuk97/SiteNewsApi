@@ -24,7 +24,7 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
 
         public  Task<UsersNews> DeleteLikedNewsAsync(UsersNews entity)
         {
-            Task.FromResult(context.Set<UsersNews>().Remove(entity));
+            context.Set<UsersNews>().Remove(entity);
             return Task.FromResult(entity);
         }
 
