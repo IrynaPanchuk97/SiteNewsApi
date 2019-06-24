@@ -1,18 +1,20 @@
 USE NewsDB
 GO
 
-ALTER TRIGGER [dbo].[TRIGGER_DATE_NEWS_CREATE]
+CREATE TRIGGER [dbo].[TRIGGER_DATE_NEWS_CREATE]
   ON [dbo].[News]
   AFTER INSERT
   AS
 BEGIN
   UPDATE [dbo].[News]
     SET CreateDate = GETDATE()
+	FROM inserted
+	WHERE inserted.Id=News.Id
 END
 
 GO
 
-ALTER TRIGGER [dbo].[TRIGGER_DATE_NEWS_UPDATE] 
+CREATE TRIGGER [dbo].[TRIGGER_DATE_NEWS_UPDATE] 
 ON [dbo].[News]
 AFTER UPDATE
 AS
@@ -27,7 +29,7 @@ END
 
 GO
 
-ALTER TRIGGER [dbo].[TRIGGER_DATE_USER_CREATE]
+CREATE TRIGGER [dbo].[TRIGGER_DATE_USER_CREATE]
   ON [dbo].[User]
   AFTER INSERT
   AS
@@ -35,11 +37,13 @@ BEGIN
   UPDATE [dbo].[User]
     SET CreateDate = GETDATE(),
 		IsActive = 'true'
+		FROM inserted
+		WHERE inserted.Id = [User].Id
 END
 
 GO
 
-ALTER TRIGGER [dbo].[TRIGGER_DATE_USER_UPDATE]
+CREATE TRIGGER [dbo].[TRIGGER_DATE_USER_UPDATE]
   ON [dbo].[User]
   AFTER UPDATE
   AS

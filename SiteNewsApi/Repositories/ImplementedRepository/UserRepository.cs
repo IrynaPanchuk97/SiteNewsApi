@@ -22,10 +22,10 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
             return Task.FromResult(entity);
         }
 
-        public  Task<UsersNews> DeleteLikedNewsAsync(UsersNews entity)
+        public  UsersNews DeleteLikedNewsAsync(UsersNews entity)
         {
             context.Set<UsersNews>().Remove(entity);
-            return Task.FromResult(entity);
+            return entity;
         }
 
         public override Task<IEnumerable<User>> GetAllAsync()
