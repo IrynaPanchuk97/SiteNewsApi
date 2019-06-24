@@ -11,7 +11,15 @@ namespace SiteNewsApi.Redis
 
         public RedisCash()
         {
-            this.redisConnections = ConnectionMultiplexer.Connect("localhost");
+            var configurationOptions = new ConfigurationOptions
+            {
+                EndPoints =
+                    {
+                        { "https://localhost:44396",443 }
+                    },
+                AbortOnConnectFail = false,
+            };
+            this.redisConnections = ConnectionMultiplexer.Connect(configurationOptions);
         }
         public void Set<T>(string key, T objectToCache) where T : class
         {
