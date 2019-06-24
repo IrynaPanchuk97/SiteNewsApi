@@ -5,5 +5,6 @@ namespace SiteNewsApi.Repositories.InterfaceRepository
 {    public interface IUserRepository : IBaseRepository<User>
     {
         Task<UsersNews> AddLikedNewsAsync(UsersNews entity);
+        Task<UsersNews> DeleteLikedNewsAsync(UsersNews entity);
     }
 }

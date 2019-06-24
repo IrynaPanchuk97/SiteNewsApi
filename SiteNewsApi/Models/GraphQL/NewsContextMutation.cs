@@ -24,17 +24,29 @@ namespace SiteNewsApi.Models.GraphQL
                 });
 
             Field<UserNewsType>( 
-        "userLikeNews",
-        arguments: new QueryArguments(
-            new QueryArgument<UserNewsInputType> { Name = "userNews" }
-            ),
-        resolve: context =>
-        {
-            var userNews = context.GetArgument<UsersNews>("userNews");
-            return unitOfWork.UserRepository.AddLikedNewsAsync(userNews);
-
-        });
-
+                    "userLikeNews",
+                    arguments: new QueryArguments(
+                        new QueryArgument<UserNewsInputType> { Name = "userNews" }
+                        ),
+                    resolve: context =>
+                    {
+                        var userNews = context.GetArgument<UsersNews>("userNews");
+                        var result = unitOfWork.UserRepository.AddLikedNewsAsync(userNews);
+                        unitOfWork.SaveAsync();
+                        return result;
+                    });
+            Field<UserNewsType>(
+                    "userDisLikeNews",
+                    arguments: new QueryArguments(
+                        new QueryArgument<UserNewsInputType> { Name = "userNews" }
+                        ),
+                    resolve: context =>
+                    {
+                        var userNews = context.GetArgument<UsersNews>("userNews");
+                        var result = unitOfWork.UserRepository.DeleteLikedNewsAsync(userNews);
+                        unitOfWork.SaveAsync();
+                        return result;
+                    });
         }
     }
 }

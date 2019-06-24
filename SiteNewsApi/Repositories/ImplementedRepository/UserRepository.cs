@@ -16,10 +16,16 @@ namespace SiteNewsApi.Repositories.ImplementedRepository
             this.context = context;
         }
 
-        public async Task<UsersNews> AddLikedNewsAsync(UsersNews entity)
+        public  Task<UsersNews> AddLikedNewsAsync(UsersNews entity)
         {
-            await context.Set<UsersNews>().AddAsync(entity);
-            return entity;
+            context.Set<UsersNews>().AddAsync(entity);
+            return Task.FromResult(entity);
+        }
+
+        public  Task<UsersNews> DeleteLikedNewsAsync(UsersNews entity)
+        {
+            Task.FromResult(context.Set<UsersNews>().Remove(entity));
+            return Task.FromResult(entity);
         }
 
         public override Task<IEnumerable<User>> GetAllAsync()
