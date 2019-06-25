@@ -18,6 +18,12 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsWPF", "..\NewsWPF\NewsWPF.csproj", "{39C06E75-A3CB-4B5E-9244-2A75C551BAB7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiteNewsApiML.Model", "SiteNewsApiML.Model\SiteNewsApiML.Model.csproj", "{B94B2324-BCE3-4C6F-85DC-1F66E20AA2F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiteNewsApiML.ConsoleApp", "SiteNewsApiML.ConsoleApp\SiteNewsApiML.ConsoleApp.csproj", "{A0B6BE16-942A-4583-B639-BBDB8C4B2CD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteNewsAoiML.Model", "..\SiteNewsAoiML.Model\SiteNewsAoiML.Model.csproj", "{F220707F-FEDD-420B-8351-C727DF3F23C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +54,18 @@ Global
 		{39C06E75-A3CB-4B5E-9244-2A75C551BAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39C06E75-A3CB-4B5E-9244-2A75C551BAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39C06E75-A3CB-4B5E-9244-2A75C551BAB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B94B2324-BCE3-4C6F-85DC-1F66E20AA2F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B94B2324-BCE3-4C6F-85DC-1F66E20AA2F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B94B2324-BCE3-4C6F-85DC-1F66E20AA2F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B94B2324-BCE3-4C6F-85DC-1F66E20AA2F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B6BE16-942A-4583-B639-BBDB8C4B2CD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B6BE16-942A-4583-B639-BBDB8C4B2CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B6BE16-942A-4583-B639-BBDB8C4B2CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B6BE16-942A-4583-B639-BBDB8C4B2CD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F220707F-FEDD-420B-8351-C727DF3F23C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F220707F-FEDD-420B-8351-C727DF3F23C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F220707F-FEDD-420B-8351-C727DF3F23C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F220707F-FEDD-420B-8351-C727DF3F23C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
